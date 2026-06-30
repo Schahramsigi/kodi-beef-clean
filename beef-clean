@@ -1,14 +1,96 @@
 #!/usr/bin/env bash
 
+###############################################################################
+# beef-clean
+#
+# Cleanup utility for Kodi Artwork Beef
+#
+# https://github.com/Schahramsigi/kodi-beef-clean
+###############################################################################
+
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-VERSION="0.1.0"
-
 readonly PROGRAM="beef-clean"
+readonly VERSION="0.1.0"
+
+info() {
+    printf "[INFO] %s\n" "$*"
+}
+
+warn() {
+    printf "[WARN] %s\n" "$*" >&2
+}
+
+error() {
+    printf "[ERROR] %s\n" "$*" >&2
+}
+
+################################################################################
+# print_version
+################################################################################
+
+print_version() {
+    echo "$PROGRAM $VERSION"
+}
+
+################################################################################
+# usage
+################################################################################
+
+usage() {
+cat <<EOF
+$PROGRAM $VERSION
+
+Usage:
+    $PROGRAM [OPTIONS]
+
+Options:
+
+    --dry-run          Scan only, delete nothing
+    --delete           Delete duplicate artwork
+    --interactive  	   Ask before deleting
+	--stats            Show statistics only
+    --path DIR         Scan directory
+    --help             Show this help
+    --version          Show version
+
+Examples:
+
+    $PROGRAM --dry-run
+    $PROGRAM --delete
+    $PROGRAM --path "/media/schahram/HDE1/kino 1"
+
+EOF
+}
+
+################################################################################
+# main
+################################################################################
 
 main() {
-    echo "$PROGRAM $VERSION"
+
+    case "${1:-}" in
+
+        --help|-h)
+            usage
+            ;;
+
+        --version|-v)
+            print_version
+            ;;
+
+        "")
+            usage
+            ;;
+
+        *)
+			error "Unknown option: $1"
+			echo
+			usage
+			exit 1
+		;;
+    esac
 }
 
 main "$@"

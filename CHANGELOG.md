@@ -1,5 +1,11 @@
 # Changelog
 
-## v0.1.0
+## [0.1.0] - 2026-06-30
 
-Initial project structure.
+### Added
+
+- Initial project structure
+- Git repository
+- GitHub repository
+- README
+- MIT License
