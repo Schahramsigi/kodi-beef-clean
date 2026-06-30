@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+VERSION="0.1.0"
+
+readonly PROGRAM="beef-clean"
+
+main() {
+    echo "$PROGRAM $VERSION"
+}
+
+main "$@"
